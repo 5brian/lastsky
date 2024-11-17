@@ -93,12 +93,12 @@ export default function Home() {
       <div className="max-w-2xl mx-auto px-4 py-8">
         {!isLoggedIn ? (
           <div className="flex flex-col items-center justify-center h-[80vh] space-y-6">
-            <h1 className="text-4xl font-bold text-blue-400">LastSky</h1>
+            <h1 className="text-4xl font-bold text-blue-400">lastsky</h1>
             <button
               onClick={() => (window.location.href = "/api/auth")}
               className="bg-green-600 hover:bg-green-500 text-white font-bold px-8 py-3 rounded-md flex items-center space-x-2"
             >
-              <span>Connect Spotify</span>
+              <span>connect spotify</span>
             </button>
           </div>
         ) : (
@@ -109,9 +109,7 @@ export default function Home() {
                 <div>
                   <h1 className="text-2xl font-bold">Username</h1>
                   <p className="text-gray-400">
-                    {currentTrack?.isPlaying
-                      ? "Currently Playing"
-                      : "Currently Offline"}
+                    {currentTrack?.isPlaying ? "online" : "offline"}
                   </p>
                 </div>
               </div>
@@ -136,7 +134,7 @@ export default function Home() {
                       {currentTrack.artist}
                     </p>
                     <p className="text-xs text-green-400">
-                      {currentTrack.isPlaying ? "Now Playing" : "Paused"}
+                      {currentTrack.isPlaying ? "now playing" : "paused"}
                     </p>
                   </div>
                 </div>
