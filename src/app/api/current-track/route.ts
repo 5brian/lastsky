@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import { spotifyApi } from "@/lib/spotify";
 import { cookies } from "next/headers";
 import redisClient from "@/lib/redis";
-import { formatHours } from "@/lib/utils";
 
 export async function GET() {
   const token = (await cookies()).get("spotify_access_token");
@@ -38,7 +37,6 @@ export async function GET() {
         durationMs: track.duration_ms,
         albumArt: "album" in track ? track.album.images[0]?.url : null,
         isPlaying: response.body.is_playing,
-        hoursOnRecord: formatHours(history.totalPlayTimeMs),
         plays: history.plays,
       });
     }

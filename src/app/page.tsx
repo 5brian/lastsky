@@ -174,12 +174,7 @@ export default function Home() {
                       </div>
 
                       <div className="text-right text-sm text-gray-400">
-                        <p>
-                          {track.hoursOnRecord?.includes("min")
-                            ? track.hoursOnRecord
-                            : `${track.hoursOnRecord} hrs`}{" "}
-                          on record
-                        </p>
+                        <p></p>
                         <p className="text-xs">
                           {new Date(track.playedAt).toLocaleTimeString([], {
                             hour: "2-digit",
