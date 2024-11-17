@@ -3,7 +3,6 @@ import { spotifyApi } from "@/lib/spotify";
 import { cookies } from "next/headers";
 import redisClient from "@/lib/redis";
 import { formatHours } from "@/lib/utils";
-import { PlayHistory } from "@/lib/db/types";
 
 export async function GET(request: Request) {
   const token = (await cookies()).get("spotify_access_token");

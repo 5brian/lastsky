@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
       maxAge: 3600,
     });
     return response;
-  } catch (error) {
+  } catch {
     return NextResponse.redirect(new URL("/error", request.url));
   }
 }
