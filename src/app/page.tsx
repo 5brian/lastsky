@@ -116,7 +116,7 @@ export default function Home() {
               </div>
 
               {currentTrack && (
-                <div className="flex items-center space-x-4 bg-[#16202d] p-4 rounded-lg max-w-xs">
+                <div className="flex items-center space-x-4 bg-black/30 backdrop-blur-sm p-4 rounded-lg max-w-xs">
                   {currentTrack.albumArt ? (
                     <Image
                       src={currentTrack.albumArt}
@@ -142,60 +142,64 @@ export default function Home() {
               )}
             </div>
 
-            <div className="bg-[#16202d] rounded-lg p-4">
-              <h2 className="text-blue-300 font-medium mb-4">
-                Recent Activity
-              </h2>
+            <div className="bg-black/10 backdrop-blur-sm rounded-lg overflow-hidden">
+              <div className="bg-black/15 backdrop-blur-sm p-4 border-b border-black/10">
+                <h2 className="text-blue-300 font-medium">Recent Activity</h2>
+              </div>
 
-              {recentTracks.slice(0, 3).map((track, i) => (
-                <div
-                  key={i}
-                  className="flex items-center space-x-4 py-3 border-t border-gray-700"
-                >
-                  {track.albumArt ? (
-                    <Image
-                      src={track.albumArt}
-                      alt={`${track.name} album art`}
-                      width={32}
-                      height={32}
-                      className="w-8 h-8 rounded"
-                    />
-                  ) : (
-                    <div className="w-8 h-8 bg-gray-700 rounded flex-shrink-0" />
-                  )}
+              <div className="px-4 pt-4 pb-2">
+                <div className="space-y-4 mb-2">
+                  {recentTracks.slice(0, 3).map((track, i) => (
+                    <div
+                      key={i}
+                      className="bg-black/30 backdrop-blur-sm rounded-lg p-4 flex items-center space-x-4"
+                    >
+                      {track.albumArt ? (
+                        <Image
+                          src={track.albumArt}
+                          alt={`${track.name} album art`}
+                          width={48}
+                          height={48}
+                          className="w-12 h-12 rounded"
+                        />
+                      ) : (
+                        <div className="w-12 h-12 bg-gray-700 rounded flex-shrink-0" />
+                      )}
 
-                  <div className="flex-1 min-w-0">
-                    <p className="font-medium truncate">{track.name}</p>
-                    <p className="text-sm text-gray-400 truncate">
-                      {track.artist}
-                    </p>
-                  </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="font-medium truncate">{track.name}</p>
+                        <p className="text-sm text-gray-400 truncate">
+                          {track.artist}
+                        </p>
+                      </div>
 
-                  <div className="text-right text-sm text-gray-400">
-                    <p>
-                      {track.hoursOnRecord?.includes("min")
-                        ? track.hoursOnRecord
-                        : `${track.hoursOnRecord} hrs`}{" "}
-                      on record
-                    </p>
-                    <p className="text-xs">
-                      {new Date(track.playedAt).toLocaleTimeString([], {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })}
-                    </p>
-                  </div>
+                      <div className="text-right text-sm text-gray-400">
+                        <p>
+                          {track.hoursOnRecord?.includes("min")
+                            ? track.hoursOnRecord
+                            : `${track.hoursOnRecord} hrs`}{" "}
+                          on record
+                        </p>
+                        <p className="text-xs">
+                          {new Date(track.playedAt).toLocaleTimeString([], {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          })}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
 
-            <div className="flex justify-end">
-              <button
-                onClick={() => router.push("/library")}
-                className="text-[#66c0f4] hover:text-white text-sm"
-              >
-                View All Scrobbles
-              </button>
+                <div className="flex justify-end">
+                  <button
+                    onClick={() => router.push("/library")}
+                    className="text-[#66c0f4] hover:text-white text-sm"
+                  >
+                    View All Scrobbles
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         )}
