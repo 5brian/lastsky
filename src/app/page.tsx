@@ -89,8 +89,8 @@ export default function Home() {
   }, [isLoggedIn]);
 
   return (
-    <div className="min-h-screen bg-[#1b2838] text-white">
-      <div className="max-w-2xl mx-auto px-4 py-8">
+    <div className="min-h-screen bg-[#1b2838] text-white flex items-center justify-center">
+      <div className="w-full max-w-2xl px-4 py-8 bg-black/10 backdrop-blur-sm rounded-lg">
         <h1 className="text-4xl font-bold text-blue-400 mb-6">lastsky</h1>
         {!isLoggedIn ? (
           <div className="flex flex-col items-center justify-center h-[80vh] space-y-6">
