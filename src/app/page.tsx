@@ -23,30 +23,24 @@ export default function Home() {
     const scrobbleTrack = async (track: Track) => {
       if (!track) return;
 
-      // Track started playing
       if (track.isPlaying && !lastPlayingStatus.current) {
-        // If this is a new track, reset the timer
         if (track.id !== currentTrackId.current) {
           playStartTime.current = Date.now();
           currentTrackId.current = track.id;
         }
-        // If it's the same track resuming, we keep the accumulated time
       }
 
-      // Track stopped playing (either paused or ended)
       if (
         !track.isPlaying &&
         lastPlayingStatus.current &&
         playStartTime.current
       ) {
-        // Calculate how long the track played
         const playDuration = Date.now() - playStartTime.current;
         const requiredDuration = Math.min(
           (track.durationMs ?? 0) * 0.5,
           240000
-        ); // 50% of song or 4 minutes
+        );
 
-        // If played long enough, scrobble it
         if (playDuration >= requiredDuration) {
           await fetch("/api/scrobble", {
             method: "POST",
@@ -58,7 +52,6 @@ export default function Home() {
           });
         }
 
-        // Reset the play timer
         playStartTime.current = null;
       }
 
@@ -86,7 +79,7 @@ export default function Home() {
 
       if (recentRes.ok) {
         const tracks = await recentRes.json();
-        setRecentTracks(tracks.slice(0, currentTrack ? 2 : 3));
+        setRecentTracks(tracks);
       }
     };
 
@@ -110,25 +103,21 @@ export default function Home() {
           </div>
         ) : (
           <div className="space-y-6">
-            <div className="flex items-center space-x-4 mb-8">
-              <div className="w-16 h-16 bg-blue-500 rounded-full"></div>
-              <div>
-                <h1 className="text-2xl font-bold">Username</h1>
-                <p className="text-gray-400">
-                  {currentTrack?.isPlaying
-                    ? "Currently Playing"
-                    : "Currently Offline"}
-                </p>
+            <div className="flex justify-between items-start">
+              <div className="flex items-center space-x-4">
+                <div className="w-16 h-16 bg-blue-500 rounded-full"></div>
+                <div>
+                  <h1 className="text-2xl font-bold">Username</h1>
+                  <p className="text-gray-400">
+                    {currentTrack?.isPlaying
+                      ? "Currently Playing"
+                      : "Currently Offline"}
+                  </p>
+                </div>
               </div>
-            </div>
-
-            <div className="bg-[#16202d] rounded-lg p-4">
-              <h2 className="text-blue-300 font-medium mb-4">
-                Recent Activity
-              </h2>
 
               {currentTrack && (
-                <div className="flex items-center space-x-4 py-3 border-t border-gray-700 bg-[#1b2838] p-4 rounded-lg mb-4">
+                <div className="flex items-center space-x-4 bg-[#16202d] p-4 rounded-lg max-w-xs">
                   {currentTrack.albumArt ? (
                     <Image
                       src={currentTrack.albumArt}
@@ -146,23 +135,20 @@ export default function Home() {
                     <p className="text-sm text-gray-400 truncate">
                       {currentTrack.artist}
                     </p>
-                  </div>
-
-                  <div className="text-right text-sm text-gray-400">
-                    <p>
-                      {currentTrack.hoursOnRecord?.includes("min")
-                        ? currentTrack.hoursOnRecord
-                        : `${currentTrack.hoursOnRecord || "0.0"} hrs`}{" "}
-                      on record
-                    </p>
                     <p className="text-xs text-green-400">
                       {currentTrack.isPlaying ? "Now Playing" : "Paused"}
                     </p>
                   </div>
                 </div>
               )}
+            </div>
 
-              {recentTracks.map((track, i) => (
+            <div className="bg-[#16202d] rounded-lg p-4">
+              <h2 className="text-blue-300 font-medium mb-4">
+                Recent Activity
+              </h2>
+
+              {recentTracks.slice(0, 3).map((track, i) => (
                 <div
                   key={i}
                   className="flex items-center space-x-4 py-3 border-t border-gray-700"
