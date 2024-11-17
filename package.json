@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "@types/spotify-web-api-node": "^5.0.11",
+    "@vercel/kv": "^3.0.0",
     "next": "15.0.3",
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106",
+    "redis": "^4.7.0",
     "spotify-web-api-node": "^5.0.2"
   },
   "devDependencies": {
