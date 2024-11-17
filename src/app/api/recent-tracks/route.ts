@@ -15,7 +15,7 @@ export async function GET() {
       playedAt: item.played_at,
     }));
     return NextResponse.json(tracks);
-  } catch (error) {
+  } catch {
     return new NextResponse("Error fetching tracks", { status: 500 });
   }
 }

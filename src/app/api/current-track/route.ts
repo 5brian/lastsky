@@ -24,7 +24,7 @@ export async function GET() {
       });
     }
     return NextResponse.json(null);
-  } catch (error) {
+  } catch {
     return new NextResponse("Error fetching track", { status: 500 });
   }
 }
