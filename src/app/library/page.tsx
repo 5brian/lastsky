@@ -16,11 +16,11 @@ export default function HistoryPage() {
     <div className="min-h-screen bg-[#1b2838] text-white">
       <div className="max-w-2xl mx-auto px-4 py-8">
         <h1 className="text-2xl font-bold mb-6">library</h1>
-        <div className="bg-[#16202d] rounded-lg p-4">
+        <div className="bg-[#16202d] rounded-lg p-4 divide-y divide-gray-700">
           {tracks.map((track, i) => (
             <div
               key={i}
-              className="flex items-center space-x-4 py-3 border-t border-gray-700"
+              className="flex items-center space-x-4 py-3 first:pt-0 last:pb-0"
             >
               {track.albumArt ? (
                 <Image
