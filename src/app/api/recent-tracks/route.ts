@@ -42,8 +42,7 @@ export async function GET(request: Request) {
     });
 
     return NextResponse.json(tracks);
-  } catch (error) {
-    console.error("Error fetching tracks:", error);
+  } catch {
     return new NextResponse("Error fetching tracks", { status: 500 });
   }
 }
